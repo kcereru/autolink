@@ -1,0 +1,3 @@
+plugins:
+  autolink_enabled:
+    default: true
