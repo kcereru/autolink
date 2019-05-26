@@ -1,6 +1,6 @@
 # name: autolink
 # about: Plugin to autolink #numbers in posts to the corresponding post in the topic
-# version: 0.1.0
+# version: 1.0.0
 # authors: KC Maddever (kcereru)
 # url: https://github.com/kcereru/autolink
 
