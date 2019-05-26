@@ -13,7 +13,7 @@ after_initialize do
 
     # If post exists, replace with link, otherwise no changes
 
-    post.raw.gsub!(/#(\d*)/) { |post_num|
+    post.raw.gsub!(/#(\d*)[^\]]/) { |post_num|
       if(specific_post(post_num.tr('#', ''), post.topic_id))
         '[#' + post_num.tr('#', '') + '](' + specific_post(post_num.tr('#', ''), post.topic_id).full_url + ')'
       else
