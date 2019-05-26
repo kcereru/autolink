@@ -10,8 +10,17 @@ enabled_site_setting :autolink_enabled
 
 after_initialize do
   DiscourseEvent.on(:post_created) do |post|
-    # as a first step, just change #postnumber to [#postnumber](posturl)
-    post.raw.gsub!(/#(\d*)/) { |post_num| '[#' + post_num.tr('#', '') + '](' + specific_post(post_num.tr('#', ''), post.topic_id).full_url + ')' }
+
+    # If post exists, replace with link, otherwise no changes
+
+    post.raw.gsub!(/#(\d*)/) { |post_num|
+      if(specific_post(post_num.tr('#', ''), post.topic_id))
+        '[#' + post_num.tr('#', '') + '](' + specific_post(post_num.tr('#', ''), post.topic_id).full_url + ')'
+      else
+        post_num
+      end
+    }
+
     post.save
   end
 end
