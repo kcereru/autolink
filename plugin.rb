@@ -11,6 +11,12 @@ enabled_site_setting :autolink_enabled
 after_initialize do
   DiscourseEvent.on(:post_created) do |post|
 
+    # if poll exists in post (checking for poll closing tag) ignore
+
+    if post.raw.include? "[/poll]"
+      next
+    end
+
     # If post exists, replace with link, otherwise no changes
     # Ignore numbers followed by a square bracket, they may be links
 
